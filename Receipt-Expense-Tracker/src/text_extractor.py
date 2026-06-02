@@ -67,6 +67,8 @@ def distinguish_rows(lst, thresh=15):
 def extract_text(image_path, thresh, order='yes'):
     predictions = ocr(image_path)
     predictions = get_distance(predictions)
+    #Sort by Y-coordinate
+    predictions = sorted(predictions, key=lambda x: x['distance_y'])
     predictions = list(distinguish_rows(predictions, thresh))
     # Remove all empty rows
     predictions = list(filter(lambda x:x!=[], predictions))
@@ -75,10 +77,18 @@ def extract_text(image_path, thresh, order='yes'):
     ylst = ['yes', 'y']
     for pr in predictions:
         if order in ylst: 
-            row = sorted(pr, key=lambda x:x['distance_from_origin'])
+            row = sorted(pr, key=lambda x:x['center_x'])
             for each in row: 
-                ordered_preds.append(each['text'])
+                ordered_preds.append({'text' : each['text'],
+                                      'center_y' : each['center_y'],
+                                      'distance_y' : each['distance_y']})
+                
+        else:
+            for each in pr:
+                ordered_preds.append({'text' : each['text'],
+                                      'center_y' : each['center_y'],})
+                
     return ordered_preds
 
-final_text_flow = extract_text('Receipt_3.png', thresh=15, order='yes')
-print(final_text_flow)
+final_text = extract_text('Receipt_3.png', thresh=15, order='yes')
+print(final_text)
