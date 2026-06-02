@@ -10,6 +10,8 @@ import keras_ocr
 def ocr(image_path):
     #initialize pipeline
     pipeline = keras_ocr.pipeline.Pipeline()
+    
+    print("Starting to read image and extract text...")
 
     #read image
     image = keras_ocr.tools.read(image_path)

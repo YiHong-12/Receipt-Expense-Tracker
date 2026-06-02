@@ -13,6 +13,7 @@ Open your terminal (or Git Bash) and clone the repository:
 ```bash
 git clone <YOUR_GITHUB_REPOSITORY_URL>
 ```
+Make sure to save the folder in C: drive (due to certain limitations from window).
 
 ### 2. Open the VS Code Terminal
 Press Ctrl + ` (or go to Terminal > New Terminal at the top menu). Ensure your terminal is pointing at your project root directory.
@@ -50,7 +51,7 @@ pip install -r requirements.txt
 ### Testing Before Starting
 Once everything is successfully installed and your environment is activated, run this in terminal:
 ```bash
-python text_extractor.py
+python Receipt-Expense-Tracker\src/text_extractor.py
 ```
 
 ### Must Do Before Coding
