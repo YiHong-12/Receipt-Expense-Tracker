@@ -25,17 +25,17 @@ python -m venv venv
 
 ### 4.Activate the Environment
 You must turn on the virtual environment engine before installing packages.
-# Windows:
+#### Windows:
 ```bash
 .\venv\Scripts\Activate
 ```
-# MacOS:
+##### MacOS:
 ```bash
 source venv/bin/activate
 ```
 You will see a green (venv) at the beginning of the terminal.
 
-# Common Activation Fixes (Windows Only)
+##### Common Activation Fixes (Windows Only)
 If you get an "Execution Policy" Red Error: Windows might block script execution. Bypass it for this VS Code session by running:
 ```bash
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
