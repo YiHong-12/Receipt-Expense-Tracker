@@ -1,5 +1,0 @@
-tensorflow
-tf-keras
-keras-ocr
-numpy<2.0
-matplotlib
