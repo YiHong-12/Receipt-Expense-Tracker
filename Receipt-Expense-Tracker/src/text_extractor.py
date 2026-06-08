@@ -64,31 +64,32 @@ def distinguish_rows(lst, thresh=15):
             sublists = [lst[i+1]]
     yield sublists
 
-def extract_text(image_path, thresh, order='yes'):
+def extract_text(image_path, thresh):
     predictions = ocr(image_path)
     predictions = get_distance(predictions)
+
     #Sort by Y-coordinate
     predictions = sorted(predictions, key=lambda x: x['distance_y'])
-    predictions = list(distinguish_rows(predictions, thresh))
-    # Remove all empty rows
-    predictions = list(filter(lambda x:x!=[], predictions))
-    # Order text detections in human readable format
-    ordered_preds = []
-    ylst = ['yes', 'y']
-    for pr in predictions:
-        if order in ylst: 
-            row = sorted(pr, key=lambda x:x['center_x'])
-            for each in row: 
-                ordered_preds.append({'text' : each['text'],
-                                      'center_y' : each['center_y'],
-                                      'distance_y' : each['distance_y']})
-                
-        else:
-            for each in pr:
-                ordered_preds.append({'text' : each['text'],
-                                      'center_y' : each['center_y'],})
-                
-    return ordered_preds
 
-final_text = extract_text('Receipt_3.png', thresh=15, order='yes')
-print(final_text)
+    #Group into distinct rows
+    predictions = list(distinguish_rows(predictions, thresh))
+    predictions = list(filter(lambda x:x!=[], predictions))
+   
+    ordered_rows = []
+
+    for row_index,pr in enumerate(predictions):
+        #sort words in this specific row
+        sorted_row = sorted(pr, key=lambda x: x['center_x'])
+
+        row_data = {
+            'row_index': row_index,
+            'data':[{'text': item['text'], 'x':item['center_x']} for item in sorted_row] 
+        }
+        ordered_rows.append(row_data)
+
+    return ordered_rows
+
+extracted_text = extract_text('Receipt_1.jpg', 15)
+print(extracted_text)
+
+
