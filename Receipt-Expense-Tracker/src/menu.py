@@ -1,11 +1,5 @@
 import sys
-import tf_keras
 
-sys.modules['tensorflow.keras'] = tf_keras
-sys.modules['keras'] = tf_keras
-
-import keras_ocr
-import math
 
 from pathlib import Path
 import subprocess
