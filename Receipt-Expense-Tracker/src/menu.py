@@ -7,28 +7,42 @@ sys.modules['keras'] = tf_keras
 import keras_ocr
 import math
 
+from pathlib import Path
 import subprocess
+#subprocess function: Python. (n.d.). subprocess — Subprocess management — Python 3.8.5 documentation. Docs.python.org. https://docs.python.org/3/library/subprocess.html
+
+
 
 from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 
+#pathlib function: pathlib — Object-oriented filesystem paths — Python 3.9.4 documentation. (n.d.). Docs.python.org. https://docs.python.org/3/library/pathlib.html
+SRC_folder = Path(__file__).resolve().parent
+main_folder = SRC_folder.parent.parent
+
+def run_python_file(file_name):
+
+    subprocess.run(
+        [sys.executable, str(SRC_folder / file_name)],
+        cwd=str(main_folder)
+    )
 
 def imp_upload():
-    messagebox.showinfo(title='Loading Page',message='Navigating to Receipt Capture Module...')
-    subprocess.run(["python","receipt_capture,py"])
+    messagebox.showinfo(title='Loading Page', message='Navigating to Receipt Capture Module...')
+    run_python_file("receipt_capture.py")
 
-def imp_dasgboard():
-    messagebox.showinfo(title='Loading Page',message='Navigating to Dashboard...')
-    subprocess.run(["python","dashboard.py"])
+def imp_dashboard():
+    messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
+    run_python_file("dashboard.py")
 
 def imp_history():
-    messagebox.showinfo(title='Loading Page',message='Navigating to Transaction History...')
-    subprocess.run(["python","categorize.py"])
+    messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')
+    run_python_file("categorize.py")
 
 def imp_Edit():
-    messagebox.showinfo(title='Loading Page',message='Navigating to Manual Edit Module...')
-    subprocess.run(["python","validation.py"])
+    messagebox.showinfo(title='Loading Page', message='Navigating to Manual Edit Module...')
+    run_python_file("validation.py")
 
 def Exit():
     if messagebox.askyesno(title='Exit ?',message="Do you want to exit the program?"):
@@ -62,7 +76,7 @@ bt_upload.place(x=200,y=150)
 bt_dashboard=Button(window,text="2) Open Dashboard",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=imp_dasgboard)#upload command later
+                 bg="#90c9de",command=imp_dashboard)#upload command later
 bt_dashboard.place(x=200,y=230)
                  
 
