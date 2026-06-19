@@ -1,20 +1,45 @@
 import sys
 import tf_keras
 import math
+import cv2
+
+import tensorflow as tf
+tf.config.threading.set_intra_op_parallelism_threads(4)
+tf.config.threading.set_inter_op_parallelism_threads(4)
 
 sys.modules['tensorflow.keras'] = tf_keras
 sys.modules['keras'] = tf_keras
 
 import keras_ocr
 
-def ocr(image_path):
-    #initialize pipeline
-    pipeline = keras_ocr.pipeline.Pipeline()
-    
+#initialize pipeline
+print("Loading OCR models into memory...")
+pipeline = keras_ocr.pipeline.Pipeline()
+print("Models loaded successfully.")
+
+def ocr(image_path, pipeline):
     print("Starting to read image and extract text...")
 
     #read image
-    image = keras_ocr.tools.read(image_path)
+    image = cv2.imread(image_path)
+
+    if image is None:
+        raise FileNotFoundError(f"Could not open or find the image: {image_path}.")
+
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    max_width = 1000
+    
+    # Check if the image width (shape[1]) is larger than our max limit
+    if image.shape[1] > max_width:
+        # Calculate the scale factor to maintain the aspect ratio
+        scale = max_width / image.shape[1]
+        new_width = int(image.shape[1] * scale)
+        new_height = int(image.shape[0] * scale)
+        
+        # Resize using INTER_AREA, which is best for shrinking images
+        image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
+        print(f"--> Image resized to {new_width}x{new_height} to speed up processing.")
 
     #store predictions in a list of tuples (text, box_coordinates) tuples
     prediction_groups = pipeline.recognize([image])
@@ -64,8 +89,8 @@ def distinguish_rows(lst, thresh=15):
             sublists = [lst[i+1]]
     yield sublists
 
-def extract_text(image_path, thresh):
-    predictions = ocr(image_path)
+def extract_text(image_path, thresh,pipeline):
+    predictions = ocr(image_path, pipeline)
     predictions = get_distance(predictions)
 
     #Sort by Y-coordinate
@@ -89,7 +114,5 @@ def extract_text(image_path, thresh):
 
     return ordered_rows
 
-extracted_text = extract_text('Receipt_1.jpg', 15)
+extracted_text = extract_text('Receipt_1.jpg', 15, pipeline)
 print(extracted_text)
-
-
