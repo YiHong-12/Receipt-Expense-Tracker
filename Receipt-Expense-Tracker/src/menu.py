@@ -1,11 +1,8 @@
 import sys
 
-
 from pathlib import Path
 import subprocess
 #subprocess function: Python. (n.d.). subprocess — Subprocess management — Python 3.8.5 documentation. Docs.python.org. https://docs.python.org/3/library/subprocess.html
-
-
 
 from tkinter import *
 import tkinter as tk
@@ -24,7 +21,7 @@ def run_python_file(file_name):
 
 def imp_upload():
     messagebox.showinfo(title='Loading Page', message='Navigating to Receipt Capture Module...')
-    run_python_file("receipt_capture.py")
+    run_python_file("upload_receipt.py")
 
 def imp_dashboard():
     messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
@@ -92,10 +89,4 @@ bt_exit=Button(window,text="5) Exit",
                  bg="#90c9de",command=Exit)#upload command later
 bt_exit.place(x=200,y=470)
             
-            
-
-
-
-
-
 window.mainloop()
