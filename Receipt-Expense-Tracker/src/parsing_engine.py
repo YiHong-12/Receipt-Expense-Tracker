@@ -1,6 +1,8 @@
 import re
+import os
+import text_extractor
 
-from matplotlib import text
+from matplotlib import image, text
 
 def parse_receipt(raw_texts):
     # Extract possible price tokens
@@ -95,7 +97,10 @@ def parse_receipt(raw_texts):
 
     return result
 
-extracted_text = ['artisans', 'the', 'pantry', 'foods', 'fine', 'market', '789', 'willow', 'rd', 'tx', '78701', '5550199', 'creek', 'austin', '101', '512', 'cash', 'receipt', 'qty', 'item', 'amount', 'sourdough', 'loaf', '5650', '1', 'wildflower', 's1499', 'honey', 'jar', 'l', 's825', 'pantry', 'artisan', 'crackers', '1', 'coffee', 's1850', 'bag', 'fairtrade', '1', 'kombucha', 'bottles', '51000', '2', 'cheddar', 'wedge', 'smoked', '510', '18', '1', 's6842', 'total', 'sto00', 'cash', 'change', '5158', 'for', 'with', 'custom', 'sincere', 'appreciation', 'your', 'the', 'artisans', 'pantry', 'ap']
 
-parsed_receipt = parse_receipt(extracted_text)
-print(parsed_receipt)
+def upload_and_parse_receipt(image):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    image_path = os.path.join(script_dir, image)
+    extracted_text = text_extractor.extract_raw_text(image_path)
+    parsed_receipt = parse_receipt(extracted_text)
+    return parsed_receipt
