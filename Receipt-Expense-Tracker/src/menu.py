@@ -30,7 +30,7 @@ def run_python_file(file_name):
 
 def imp_upload():
     messagebox.showinfo(title='Loading Page', message='Navigating to Receipt Capture Module...')
-    run_python_file("receipt_capture.py")
+    run_python_file("parsing_engine.py")
 
 def imp_dashboard():
     messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
