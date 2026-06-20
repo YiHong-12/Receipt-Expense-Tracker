@@ -10,7 +10,8 @@ from tkinter import messagebox, filedialog
 from tkinter import Label
 from PIL import Image, ImageTk
 
-import parsing_engine 
+import parsing_engine
+import edit_receipt
 
 #pathlib function: pathlib — Object-oriented filesystem paths — Python 3.9.4 documentation. (n.d.). Docs.python.org. https://docs.python.org/3/library/pathlib.html
 SRC_folder = Path(__file__).resolve().parent
@@ -59,6 +60,9 @@ def open_upload_page(main_menu):
             extracted_data = parsing_engine.upload_and_parse_receipt(select_image)
 
             print(extracted_data)
+
+            app.withdraw()  # Hide the upload page
+            edit_receipt.open_edit_receipt_page(app)  # Open the edit receipt page
 
         else:
             print("\n[ERROR] Please click 'Locate Image' and select a file first!")

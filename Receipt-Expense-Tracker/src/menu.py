@@ -9,6 +9,9 @@ import tkinter as tk
 from tkinter import messagebox
 
 import upload_receipt
+import dashboard
+import history
+import edit
 
 #pathlib function: pathlib — Object-oriented filesystem paths — Python 3.9.4 documentation. (n.d.). Docs.python.org. https://docs.python.org/3/library/pathlib.html
 SRC_folder = Path(__file__).resolve().parent
@@ -28,15 +31,18 @@ def imp_upload():
 
 def imp_dashboard():
     messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
-    run_python_file("dashboard.py")
+    window.withdraw()  # Hide the main menu window
+    dashboard.open_dashboard_page(window)
 
 def imp_history():
     messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')
-    run_python_file("categorize.py")
+    window.withdraw()  # Hide the main menu window
+    history.open_history_page(window)
 
 def imp_Edit():
     messagebox.showinfo(title='Loading Page', message='Navigating to Manual Edit Module...')
-    run_python_file("validation.py")
+    window.withdraw()  # Hide the main menu window
+    edit.open_edit_page(window)
 
 def Exit():
     if messagebox.askyesno(title='Exit ?',message="Do you want to exit the program?"):
