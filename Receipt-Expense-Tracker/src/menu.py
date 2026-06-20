@@ -8,6 +8,11 @@ from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 
+import upload_receipt
+import dashboard
+import history
+import edit
+
 #pathlib function: pathlib — Object-oriented filesystem paths — Python 3.9.4 documentation. (n.d.). Docs.python.org. https://docs.python.org/3/library/pathlib.html
 SRC_folder = Path(__file__).resolve().parent
 main_folder = SRC_folder.parent.parent
@@ -21,34 +26,38 @@ def run_python_file(file_name):
 
 def imp_upload():
     messagebox.showinfo(title='Loading Page', message='Navigating to Receipt Capture Module...')
-    run_python_file("upload_receipt.py")
+    window.withdraw()  # Hide the main menu window
+    upload_receipt.open_upload_page(window)
 
 def imp_dashboard():
     messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
-    run_python_file("dashboard.py")
+    window.withdraw()  # Hide the main menu window
+    dashboard.open_dashboard_page(window)
 
 def imp_history():
     messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')
-    run_python_file("categorize.py")
+    window.withdraw()  # Hide the main menu window
+    history.open_history_page(window)
 
 def imp_Edit():
     messagebox.showinfo(title='Loading Page', message='Navigating to Manual Edit Module...')
-    run_python_file("validation.py")
+    window.withdraw()  # Hide the main menu window
+    edit.open_edit_page(window)
 
 def Exit():
     if messagebox.askyesno(title='Exit ?',message="Do you want to exit the program?"):
-        print("Thank you for using Receipt Expanse Tracker!")
+        print("Thank you for using Receipt Expense Tracker!")
         window.destroy()
     else:
         pass
 
 window = Tk()
-window.title("Receipt Expanse Tracker")
+window.title("Receipt Expense Tracker")
 window.geometry("600x650")
 window.configure(bg="#ceecf5")
 
 title1=Label(window,
-            text=" Receipt Expanse Tracker",
+            text=" Receipt Expense Tracker",
             font = ("Ink Free",30,"bold"),
             bg="#ceecf5",relief=RAISED,bd=15)
 title1.place(x=60,y=10)
