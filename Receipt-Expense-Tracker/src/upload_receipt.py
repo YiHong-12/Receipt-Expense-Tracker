@@ -29,11 +29,11 @@ def upload_image():
         select_image = path
 
         img = Image.open(path)
-        img = img.resize((200, 200))
+        img = img.resize((200, 220))
         pic = ImageTk.PhotoImage(img)
 
         # re-sizing the app window in order to fit picture
-        app.geometry("560x300")
+        app.geometry("650x520")
         label.config(image=pic)
         label.image = pic
 
@@ -60,22 +60,59 @@ def confirm_image():
 app = tk.Tk()
 
 # setting title and basic size to our App
-app.title("GeeksForGeeks Image Viewer")
+app.title("Receipt Capture")
 app.geometry("560x270")
-
+app.configure(bg="#eaf6fb")
 # adding background color to our upload button
-app.option_add("*Label*Background", "white")
-app.option_add("*Button*Background", "lightgreen")
+
+main_frame=tk.Frame(
+    app,
+    bg="white",bd=2,relief="ridge"
+)
+main_frame.pack(padx=30,pady=25,fill="both",expand=True) #Adding frame for image upload UI
+
+#Main Title 
+title_Label=tk.Label(main_frame,text="Upload Receipt Image",
+                     font=("Free Ink",24,"bold"),bg="white",fg="#1f4e79")
+title_Label.pack(pady=(25,5)) 
+
+#Subtitle
+subtitle_Label=tk.Label(
+    main_frame,text="Please select a receipt image",font=("Free Ink",11),bg="white",fg="#555555"
+)
+subtitle_Label.pack(pady=(0,20))
+
+#adding frame for buttons
+button_frame=tk.Frame(main_frame,bg="white")
+button_frame.pack(pady=5)
+
 
 label = tk.Label(app)
 label.pack(pady=10)
 
 # defining our upload buttom
-uploadButton = tk.Button(app, text="Locate Image", command=upload_image)
+uploadButton = tk.Button(
+    button_frame, text="Locate Image",
+    font=("Free Ink",12,"bold"),
+    bg="#4da3d9",
+    fg="white",
+    width=16,
+    height=2,
+    bd=0, 
+    command=upload_image)
 uploadButton.pack(side=tk.BOTTOM, pady=20)
 
 # defining our confirm buttom
-confirmButton = tk.Button(app, text="Confirm Image", command=confirm_image)
+confirmButton = tk.Button( button_frame,
+    text="Confirm Image",
+    font=("Free Ink", 12, "bold"),
+    bg="#4caf50",
+    fg="white",
+    width=16,
+    height=2,
+    bd=0,
+    command=confirm_image)
 confirmButton.pack(side=tk.BOTTOM, pady=20)
+
 
 app.mainloop()
