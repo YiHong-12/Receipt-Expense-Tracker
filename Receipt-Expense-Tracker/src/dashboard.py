@@ -8,13 +8,16 @@ import categorize as db
 def open_dashboard_page(window):
     app = tk.Toplevel(window)
     app.title("Receipt Expense Tracker - Dashboard")
-    app.geometry("900x600")
+    app.geometry("900x650")
     app.configure(bg="#ceecf5")
 
     title = Label(
         app,
         text="Expense Dashboard",
-        font=("Arial", 20, "bold")
+        font=("Ink Free", 30, "bold"),
+        bg="#ceecf5",
+        relief=RAISED,
+        bd=15
     )
     title.pack(pady=10)
 
@@ -126,6 +129,7 @@ def open_dashboard_page(window):
         total_label.config(
             text=f"Total Spending ({category}): RM {total:.2f}"
         )
+    
 
 
     def on_category_change(event):
@@ -136,32 +140,47 @@ def open_dashboard_page(window):
     total_label = Label(
         app,
         text=f"Total Spending (All): RM {calculate_total_spending():.2f}",
-        font=("Arial", 14)
+        font=("Ink Free", 16, "bold"),
+        bg="#ceecf5",
+        fg="black"
     )
     total_label.pack(pady=10)
 
 
     # Chart buttons
-    chart_frame = Frame(app)
-    chart_frame.pack()
+    chart_frame = Frame(app, bg="#ceecf5")
+    chart_frame.pack(pady=5)
 
     Button(
         chart_frame,
         text="Category Chart",
+        width=18,
+        height=2,
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
         command=show_category_chart
     ).pack(side=LEFT, padx=10)
 
     Button(
         chart_frame,
         text="Merchant Chart",
+        width=18,
+        height=2,
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
         command=show_merchant_chart
     ).pack(side=LEFT, padx=10)
 
     # Filter
-    filter_frame = Frame(app)
-    filter_frame.pack(pady=10)
+    filter_frame = Frame(app, bg="#ceecf5")
+    filter_frame.pack(pady=15)
 
-    Label(filter_frame, text="Filter Category:").pack(side=LEFT)
+    Label(filter_frame, 
+          text="Filter Category:",
+          font=("Ink Free", 13,"bold"),
+          bg="#ceecf5"
+          ).pack(side=LEFT)
+       
 
     category_var = StringVar()
     category_var.set("All")
@@ -170,7 +189,9 @@ def open_dashboard_page(window):
         filter_frame,
         textvariable=category_var,
         values=category_list,
-        state="readonly"
+        state="readonly",
+        width=18,
+        font=("Arial", 11)
     )
 
     category_dropdown.pack(side=LEFT, padx=10)
@@ -184,14 +205,14 @@ def open_dashboard_page(window):
         app,
         columns=columns,
         show="headings",
-        height=15
+        height=13
     )
 
     for col in columns:
         tree.heading(col, text=col)
         tree.column(col, width=180, anchor="center")
 
-    tree.pack(fill=BOTH, expand=True)
+    tree.pack(fill=BOTH, expand=True, padx=30, pady=10)
 
     populate_table(tree)
 
@@ -203,3 +224,14 @@ def open_dashboard_page(window):
         window.deiconify()
 
     app.protocol("WM_DELETE_WINDOW", go_back)
+
+    back_button = Button(
+        app,
+        text="Back to Menu",
+        width=20,
+        height=2,
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
+        command=go_back
+    )
+    back_button.pack(pady=10)
