@@ -10,13 +10,6 @@ def open_edit_receipt_page(upload_page, receipt):
     app.minsize(700, 500)
     app.configure(bg="#ceecf5")
 
-    def go_back():
-        app.destroy()
-        upload_page.deiconify()
-
-    app.protocol("WM_DELETE_WINDOW", go_back)
-
-
     Label(
         app,
         text="Receipt Validation",
@@ -142,3 +135,9 @@ def open_edit_receipt_page(upload_page, receipt):
 
     # Save Button
     Button(app, text="Save", width=15, command=save).pack(pady=15)
+
+    def go_back():
+        app.destroy()
+        upload_page.deiconify()
+
+    app.protocol("WM_DELETE_WINDOW", go_back)

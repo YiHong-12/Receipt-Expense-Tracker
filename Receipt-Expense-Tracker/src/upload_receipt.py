@@ -22,9 +22,8 @@ select_image = None
 
 def open_upload_page(main_menu):
     app = tk.Toplevel(main_menu)
-    # setting title and basic size to the page
     app.title("Receipt Upload")
-    app.geometry("600x650")
+    app.minsize(600, 650)
     app.configure(bg="#ceecf5")
 
     #upload image function: https://www.geeksforgeeks.org/python/browse-upload-display-image-in-tkinter/
