@@ -1,0 +1,131 @@
+[
+    {
+        "date": "2026-06-21 18:25:10",
+        "merchant": "THE ARTISAN'S PANTRY",
+        "items": [
+            {
+                "name": "Sourdough Loaf",
+                "quantity": 1,
+                "price": 6.5,
+                "category": "others"
+            },
+            {
+                "name": "Wildflower Honey Jar",
+                "quantity": 1,
+                "price": 14.99,
+                "category": "others"
+            },
+            {
+                "name": "PANTRY Artisan Crackers",
+                "quantity": 1,
+                "price": 8.25,
+                "category": "others"
+            },
+            {
+                "name": "Bag Fair-Trade Coffee",
+                "quantity": 1,
+                "price": 18.5,
+                "category": "others"
+            },
+            {
+                "name": "Wedge Smoked Cheddar ",
+                "quantity": 1,
+                "price": 10.0,
+                "category": "others"
+            },
+            {
+                "name": "Bottles Kombucha",
+                "quantity": 2,
+                "price": 10.18,
+                "category": "others"
+            }
+        ],
+        "total": 68.42
+    },
+    {
+        "date": "2026-06-21 18:28:59",
+        "merchant": "The Chronicle Bookshop & Coffee CO.",
+        "items": [
+            {
+                "name": "The Hidden Life of Trees (Hardcover)",
+                "quantity": 1,
+                "price": 22.5,
+                "category": "others"
+            },
+            {
+                "name": "A-Z London Map (Guide)",
+                "quantity": 1,
+                "price": 9.95,
+                "category": "others"
+            },
+            {
+                "name": "Fountain Pen (Lamy Safari, special ed)",
+                "quantity": 1,
+                "price": 35.0,
+                "category": "others"
+            },
+            {
+                "name": "Premium Earl Grey Tea Bags (loose)",
+                "quantity": 2,
+                "price": 12.0,
+                "category": "others"
+            },
+            {
+                "name": "Reusable Coffee Cup (Chilly's)",
+                "quantity": 1,
+                "price": 18.0,
+                "category": "others"
+            }
+        ],
+        "total": 97.45
+    },
+    {
+        "date": "2026-06-21 18:31:59",
+        "merchant": "ECOSPACE",
+        "items": [
+            {
+                "name": "Caulliflower Pasta",
+                "quantity": 1,
+                "price": 8.2,
+                "category": "others"
+            },
+            {
+                "name": "ECOSPACE Canvas Tote Bag",
+                "quantity": 1,
+                "price": 15.9,
+                "category": "others"
+            },
+            {
+                "name": "Superfood Post Card",
+                "quantity": 1,
+                "price": 1.9,
+                "category": "others"
+            },
+            {
+                "name": "ECOSPACE Soy Chocolate Drink",
+                "quantity": 1,
+                "price": 2.75,
+                "category": "food"
+            },
+            {
+                "name": "Vegan Gummies",
+                "quantity": 2,
+                "price": 6.95,
+                "category": "others"
+            },
+            {
+                "name": "Organic Popping Corn",
+                "quantity": 1,
+                "price": 3.95,
+                "category": "others"
+            },
+            {
+                "name": "ECOSPACE Cashew Butter Spread",
+                "quantity": 1,
+                "price": 9.99,
+                "category": "others"
+            }
+        ],
+        "total": 49.64
+    }
+]

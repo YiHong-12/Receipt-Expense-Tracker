@@ -98,6 +98,8 @@ def parse_receipt(raw_texts):
     return result
 
 def upload_and_parse_receipt(image_path):
-    extracted_text = ['artisans', 'the', 'pantry', 'foods', 'fine', 'market', '789', 'willow', 'rd', 'tx', '78701', '5550199', 'creek', 'austin', '101', '512', 'cash', 'receipt', 'qty', 'item', 'amount', 'sourdough', 'loaf', '5650', '1', 'wildflower', 's1499', 'honey', 'jar', 'l', 's825', 'pantry', 'artisan', 'crackers', '1', 'coffee', 's1850', 'bag', 'fairtrade', '1', 'kombucha', 'bottles', '51000', '2', 'cheddar', 'wedge', 'smoked', '510', '18', '1', 's6842', 'total', 'sto00', 'cash', 'change', '5158', 'for', 'with', 'custom', 'sincere', 'appreciation', 'your', 'the', 'artisans', 'pantry', 'ap']
+    extracted_text = text_extractor.extract_raw_text(image_path)
+    print(extracted_text)
     parsed_receipt = parse_receipt(extracted_text)
+    
     return parsed_receipt
