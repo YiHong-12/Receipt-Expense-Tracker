@@ -10,6 +10,7 @@ import categorize as db
 def get_transactions():
     return db.load_transactions()
 
+
 def calculate_total_spending():
     return sum(t["total"] for t in get_transactions())
 
@@ -122,7 +123,6 @@ def on_category_change(event):
     filter_transactions(tree, category_var.get())
 
 
-
 def main():
     window = Tk()
     window.title("Receipt Expense Tracker - Dashboard")
@@ -199,6 +199,7 @@ def main():
 
     populate_table(tree)
 
+    # Check whether the transaction file exists
     print("Loaded transactions:", get_transactions())
 
     window.mainloop()
