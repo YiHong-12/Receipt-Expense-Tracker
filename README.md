@@ -51,7 +51,7 @@ pip install -r requirements.txt
 ### Testing Before Starting
 Once everything is successfully installed and your environment is activated, run this in terminal:
 ```bash
-python Receipt-Expense-Tracker\src/text_extractor.py
+python Receipt-Expense-Tracker/src/text_extractor.py
 ```
 
 ### Must Do Before Coding
