@@ -46,9 +46,7 @@ def merchant_summary():
     return summary
 
 
-# ==========================
 # CHARTS
-# ==========================
 def show_category_chart():
     data = category_summary()
 
@@ -70,9 +68,7 @@ def show_merchant_chart():
     plt.show()
 
 
-# ==========================
 # CATEGORY LIST
-# ==========================
 category_list = ["All"] + sorted({
     item["category"]
     for t in get_transactions()
@@ -80,9 +76,7 @@ category_list = ["All"] + sorted({
 })
 
 
-# ==========================
 # TABLE FUNCTIONS
-# ==========================
 def populate_table(tree):
     for item in tree.get_children():
         tree.delete(item)
@@ -99,9 +93,8 @@ def populate_table(tree):
             ))
 
 
-# ==========================
+
 # FILTER FUNCTION
-# ==========================
 def filter_transactions(tree, category):
     for item in tree.get_children():
         tree.delete(item)
@@ -129,9 +122,6 @@ def on_category_change(event):
     filter_transactions(tree, category_var.get())
 
 
-# ==========================
-# GUI
-# ==========================
 
 def main():
     window = Tk()
