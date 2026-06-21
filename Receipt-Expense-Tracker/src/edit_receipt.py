@@ -22,6 +22,12 @@ def open_edit_receipt_page(upload_page):
     app.title("Receipt Validation and Manual Edit")
     app.geometry("600x650")
     app.configure(bg="#ceecf5")
+
+    def go_back():
+        app.destroy()
+        upload_page.deiconify()
+
+
+    app.protocol("WM_DELETE_WINDOW", go_back)
     
 
-    

@@ -1,12 +1,3 @@
-import sys
-import tf_keras
-
-# Redirect keras imports to tf_keras for compatibility
-sys.modules['tensorflow.keras'] = tf_keras
-sys.modules['keras'] = tf_keras
-
-import keras_ocr
-import math
 import json
 from pathlib import Path
 from datetime import datetime
