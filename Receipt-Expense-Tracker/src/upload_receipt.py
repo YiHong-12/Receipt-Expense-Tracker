@@ -23,7 +23,7 @@ select_image = None
 def open_upload_page(main_menu):
     app = tk.Toplevel(main_menu)
     app.title("Receipt Expense Tracker - Upload Receipt")
-    app.minsize(600, 650)
+    app.minsize(600, 760)
     app.configure(bg="#ceecf5")
 
     #upload image function: https://www.geeksforgeeks.org/python/browse-upload-display-image-in-tkinter/
@@ -38,12 +38,12 @@ def open_upload_page(main_menu):
             select_image = path
 
             img = Image.open(path)
-            img = img.resize((200, 220))
+            img = img.resize((260, 260))
             pic = ImageTk.PhotoImage(img)
 
             # re-sizing the app window in order to fit picture
             app.geometry("650x520")
-            label.config(image=pic)
+            label.config(image=pic, text="", width=260, height=260)
             label.image = pic
 
             return path
@@ -71,67 +71,71 @@ def open_upload_page(main_menu):
         main_menu.deiconify()
 
 
-    main_frame=tk.Frame(
+    title_Label = tk.Label(
         app,
-        bg="white",bd=2,relief="ridge"
+        text=" Upload Receipt Image",
+        font=("Ink Free", 30, "bold"),
+        bg="#ceecf5",
+        relief=RAISED,
+        bd=15
     )
-    main_frame.pack(padx=30,pady=25,fill="both",expand=True) #Adding frame for image upload UI
+    title_Label.pack(pady=15)
 
-    #Main Title 
-    title_Label=tk.Label(main_frame,text="Upload Receipt Image",
-                     font=("Free Ink",24,"bold"),bg="white",fg="#1f4e79")
-    title_Label.pack(pady=(25,5)) 
-
-    #Subtitle
-    subtitle_Label=tk.Label(
-    main_frame,text="Please select a receipt image",font=("Free Ink",11),bg="white",fg="#555555"
+    
+    subtitle_Label = tk.Label(
+        app,
+        text="Please select a receipt image",
+        font=("Ink Free", 15, "bold"),
+        bg="#ceecf5"
     )
-    subtitle_Label.pack(pady=(0,20))
+    subtitle_Label.pack(pady=10)
 
-    #adding frame for buttons
-    button_frame=tk.Frame(main_frame,bg="white")
-    button_frame.pack(pady=5)
+    
+    label = tk.Label(
+        app,
+        text="No Image Selected",
+        font=("Ink Free", 14, "bold"),
+        bg="white",
+        width=40,
+        height=15,
+        relief=SUNKEN,
+        bd=3
+    )
+    label.pack(pady=15)
+ 
 
-    label = tk.Label(app)
-    label.pack(pady=10)
-
-        # defining our go back buttom
-    goBackButton = tk.Button(
-        button_frame,
-        text="Go Back",
-        font=("Free Ink", 12, "bold"),
-        bg="#f44336",
-        fg="white",
-        width=16,
-        height=2,
-        bd=0,
-        command=go_back)
-    goBackButton.pack(side=tk.BOTTOM, pady=20)
-
-
-    # defining our confirm buttom
-    confirmButton = tk.Button(
-        button_frame,
-        text="Confirm Image",
-        font=("Free Ink", 12, "bold"),
-        bg="#4caf50",
-        fg="white",
-        width=16,
-        height=2,
-        bd=0,
-        command=confirm_image)
-    confirmButton.pack(side=tk.BOTTOM, pady=20)
-
-    # defining our upload buttom
     uploadButton = tk.Button(
-        button_frame, text="Locate Image",
-        font=("Free Ink",12,"bold"),
-        bg="#4da3d9",
-        fg="white",
-        width=16,
+        app,
+        text="Locate Image",
+        width=20,
         height=2,
-        bd=0, 
-        command=upload_image)
-    uploadButton.pack(side=tk.BOTTOM, pady=20)
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
+        command=upload_image
+    )
+    uploadButton.pack(pady=10)
 
+    
+    confirmButton = tk.Button(
+        app,
+        text="Confirm Image",
+        width=20,
+        height=2,
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
+        command=confirm_image
+    )
+    confirmButton.pack(pady=10)
+
+    goBackButton = tk.Button(
+        app,
+        text="Go Back",
+        width=20,
+        height=2,
+        font=("Ink Free", 13, "bold"),
+        bg="#90c9de",
+        command=go_back
+    )
+
+    goBackButton.pack(pady=10)
     app.protocol("WM_DELETE_WINDOW", go_back)
