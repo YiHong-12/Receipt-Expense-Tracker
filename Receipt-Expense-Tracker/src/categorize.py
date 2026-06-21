@@ -61,15 +61,16 @@ def load_transactions():
         return json.load(f)
 
 
-def save_transaction(items, total):
+def save_transaction(items, total, merchant):
     # Load existing transactions so we don't overwrite them
     transactions = load_transactions()
 
     # Add the new transaction as a dictionary with date, items, and total
     transactions.append({
         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "merchant": merchant,
         "items": items,
-        "total": total
+        "total": float(total)
     })
 
     # Write the updated list back to the file

@@ -5,138 +5,135 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import categorize as db
 
-
-def get_transactions():
-    return db.load_transactions()
-
-
-def calculate_total_spending():
-    return sum(t["total"] for t in get_transactions())
-
-
-def calculate_filtered_total(category):
-    if category == "All":
-        return sum(t["total"] for t in get_transactions())
-
-    return sum(
-        item["price"]
-        for t in get_transactions()
-        for item in t["items"]
-        if item["category"] == category
-    )
-
-
-def category_summary():
-    summary = defaultdict(float)
-
-    for t in get_transactions():
-        for item in t["items"]:
-            summary[item["category"]] += item["price"]
-
-    return summary
-
-
-def merchant_summary():
-    summary = defaultdict(float)
-
-    for t in get_transactions():
-        merchant = t.get("merchant", "Unknown")
-        summary[merchant] += t["total"]
-
-    return summary
-
-
-# CHARTS
-def show_category_chart():
-    data = category_summary()
-
-    plt.figure(figsize=(6, 6))
-    plt.pie(data.values(), labels=data.keys(), autopct="%1.1f%%")
-    plt.title("Expense by Category")
-    plt.show()
-
-
-def show_merchant_chart():
-    data = merchant_summary()
-
-    plt.figure(figsize=(8, 5))
-    plt.bar(data.keys(), data.values())
-    plt.title("Spending by Merchant")
-    plt.xlabel("Merchant")
-    plt.ylabel("Amount (RM)")
-    plt.tight_layout()
-    plt.show()
-
-
-# CATEGORY LIST
-category_list = ["All"] + sorted({
-    item["category"]
-    for t in get_transactions()
-    for item in t["items"]
-})
-
-
-# TABLE FUNCTIONS
-def populate_table(tree):
-    for item in tree.get_children():
-        tree.delete(item)
-
-    for t in get_transactions():
-        merchant = t.get("merchant", "Unknown")
-
-        for item in t["items"]:
-            tree.insert("", tk.END, values=(
-                t["date"],
-                merchant,
-                item["category"],
-                f"RM {item['price']:.2f}"
-            ))
-
-
-
-# FILTER FUNCTION
-def filter_transactions(tree, category):
-    for item in tree.get_children():
-        tree.delete(item)
-
-    for t in get_transactions():
-        merchant = t.get("merchant", "Unknown")
-
-        for item in t["items"]:
-            if category == "All" or item["category"] == category:
-                tree.insert("", END, values=(
-                    t["date"],
-                    merchant,
-                    item["category"],
-                    f"RM {item['price']:.2f}"
-                ))
-
-    total = calculate_filtered_total(category)
-
-    total_label.config(
-        text=f"Total Spending ({category}): RM {total:.2f}"
-    )
-
-
-def on_category_change(event):
-    filter_transactions(tree, category_var.get())
-
-
-def main():
-    window = Tk()
-    window.title("Receipt Expense Tracker - Dashboard")
-    window.geometry("900x600")
+def open_dashboard_page(window):
+    app = tk.Toplevel(window)
+    app.title("Receipt Expense Tracker - Dashboard")
+    app.geometry("900x600")
 
     title = Label(
-        window,
+        app,
         text="Expense Dashboard",
         font=("Arial", 20, "bold")
     )
     title.pack(pady=10)
 
+    def get_transactions():
+        return db.load_transactions()
+
+
+    def calculate_total_spending():
+        return sum(float(t["total"]) for t in get_transactions())
+
+
+    def calculate_filtered_total(category):
+        if category == "All":
+            return sum(float(t["total"]) for t in get_transactions())
+
+        return sum(
+            float(item["price"])
+            for t in get_transactions()
+            for item in t["items"]
+            if item["category"] == category
+        )
+
+
+    def category_summary():
+        summary = defaultdict(float)
+
+        for t in get_transactions():
+            for item in t["items"]:
+                summary[item["category"]] += float(item["price"])
+
+        return summary
+
+
+    def merchant_summary():
+        summary = defaultdict(float)
+
+        for t in get_transactions():
+            merchant = t.get("merchant", "Unknown")
+            summary[merchant] += float(t["total"])
+
+        return summary
+
+
+    # CHARTS
+    def show_category_chart():
+        data = category_summary()
+
+        plt.figure(figsize=(6, 6))
+        plt.pie(data.values(), labels=data.keys(), autopct="%1.1f%%")
+        plt.title("Expense by Category")
+        plt.show()
+
+
+    def show_merchant_chart():
+        data = merchant_summary()
+
+        plt.figure(figsize=(8, 5))
+        plt.bar(data.keys(), data.values())
+        plt.title("Spending by Merchant")
+        plt.xlabel("Merchant")
+        plt.ylabel("Amount (RM)")
+        plt.tight_layout()
+        plt.show()
+
+
+    # CATEGORY LIST
+    category_list = ["All"] + sorted({
+        item.get("category", "others")
+        for t in get_transactions()
+        for item in t["items"]
+    })
+
+
+    # TABLE FUNCTIONS
+    def populate_table(tree):
+        for item in tree.get_children():
+            tree.delete(item)
+
+        for t in get_transactions():
+            merchant = t.get("merchant", "Unknown")
+
+            for item in t["items"]:
+                tree.insert("", tk.END, values=(
+                    t["date"],
+                    merchant,
+                    item.get("category", "others"),
+                    f"RM {item['price']:.2f}"
+                ))
+
+    # FILTER FUNCTION
+    def filter_transactions(tree, category):
+        for item in tree.get_children():
+            tree.delete(item)
+
+        for t in get_transactions():
+            merchant = t.get("merchant", "Unknown")
+
+            for item in t["items"]:
+                if category == "All" or item["category"] == category:
+                    tree.insert("", END, values=(
+                        t["date"],
+                        merchant,
+                        item["category"],
+                        f"RM {item['price']:.2f}"
+                    ))
+
+        total = calculate_filtered_total(category)
+
+        total_label.config(
+            text=f"Total Spending ({category}): RM {total:.2f}"
+        )
+
+
+    def on_category_change(event):
+        filter_transactions(tree, category_var.get())
+
+
     # Total label
     total_label = Label(
-        window,
+        app,
         text=f"Total Spending (All): RM {calculate_total_spending():.2f}",
         font=("Arial", 14)
     )
@@ -144,7 +141,7 @@ def main():
 
 
     # Chart buttons
-    chart_frame = Frame(window)
+    chart_frame = Frame(app)
     chart_frame.pack()
 
     Button(
@@ -159,9 +156,8 @@ def main():
         command=show_merchant_chart
     ).pack(side=LEFT, padx=10)
 
-
     # Filter
-    filter_frame = Frame(window)
+    filter_frame = Frame(app)
     filter_frame.pack(pady=10)
 
     Label(filter_frame, text="Filter Category:").pack(side=LEFT)
@@ -184,7 +180,7 @@ def main():
     columns = ("Date", "Merchant", "Category", "Amount")
 
     tree = ttk.Treeview(
-        window,
+        app,
         columns=columns,
         show="headings",
         height=15
@@ -201,8 +197,8 @@ def main():
     # Check whether the transaction file exists
     print("Loaded transactions:", get_transactions())
 
-    window.mainloop()
+    def go_back():
+        app.destroy()
+        window.deiconify()
 
-
-if __name__ == "__main__":
-    main()
+    app.protocol("WM_DELETE_WINDOW", go_back)

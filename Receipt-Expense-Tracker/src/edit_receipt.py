@@ -133,6 +133,7 @@ def open_edit_receipt_page(upload_page, receipt):
         validation.save_receipt(receipt_data)
 
         items = []
+        
         for name_entry, qty_entry, price_entry in item_rows:
 
             #convert quantity to numeric field
@@ -160,9 +161,13 @@ def open_edit_receipt_page(upload_page, receipt):
         #categorize the items
         items = categorize.categorize_transaction(items)
 
+        merchant = merchant_entry.get().strip()
+        if not merchant:
+            merchant = "Unknown"
+
         #save the categorized items
         try:
-            categorize.save_transaction(items, total_entry.get())
+            categorize.save_transaction(items, total_entry.get(), merchant)
         except Exception as e:
             messagebox.showerror("Save Error", f"Could not save transaction: {e}")
             return
