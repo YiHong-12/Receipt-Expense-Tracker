@@ -12,14 +12,24 @@ def open_history_page(window):
     app.configure(bg="#ceecf5")
 
     Label(
-        app,
-        text="Receipt History",
-        font=("Arial", 16, "bold")
-    ).pack(pady=15)
-
+         app,
+         text=" Receipt History",
+         font=("Ink Free", 25, "bold"),
+         bg="#ceecf5",
+         relief=tk.RAISED,
+         bd=15
+         ).pack(pady=15)
+    
+    Label(
+    app,
+    text="Double click a receipt for more details",
+    font=("Ink Free", 14, "bold"),
+    bg="#ceecf5"
+         ).pack(pady=5)
+    
     # Table frame
     table_frame = Frame(app, bg="#ceecf5")
-    table_frame.pack(fill="both", expand=True, padx=20, pady=10)
+    table_frame.pack(fill="both", expand=True, padx=30, pady=10)
 
     # Table columns
     columns = ("Date", "Merchant", "Total")
@@ -37,6 +47,8 @@ def open_history_page(window):
     # Row Styling
     style = ttk.Style()
     style.configure("Treeview", rowheight=25)
+    style.configure("Treeview", rowheight=28, font=("Arial", 10))
+    style.configure("Treeview.Heading", font=("Arial", 10, "bold"))
     tree.tag_configure("receipt", background="#d1e7dd") # Light green for the main receipt row
     tree.tag_configure("item", background="#ffffff")    # White for the item rows
     tree.tag_configure("space", background="#ceecf5")  # Matches window background to act as a visual gap
@@ -72,10 +84,13 @@ def open_history_page(window):
         detail_page.configure(bg="#ceecf5")
 
         Label(
-        detail_page,
-        text="Receipt Details",
-        font=("Arial", 16, "bold")
-        ).pack(pady=15)
+          detail_page,
+          text=" Receipt Details",
+          font=("Ink Free", 26, "bold"),
+          bg="#ceecf5",
+          relief=tk.RAISED,
+          bd=10
+          ).pack(pady=15)
         
         cols = ("Item", "Quantity")
         item_tree = ttk.Treeview(detail_page, columns=cols, show="headings", height=10)
@@ -88,7 +103,15 @@ def open_history_page(window):
         for item in receipt.get("items", []):
             item_tree.insert("", "end", values=(item.get("name"), item.get("quantity")))
 
-        Button(detail_page, text="Close", command=detail_page.destroy).pack(pady=10)
+        Button(
+            detail_page,
+            text="Close",
+            width=15,
+            height=2,
+            font=("Ink Free", 12, "bold"),
+            bg="#90c9de",
+            command=detail_page.destroy
+            ).pack(pady=10)
 
 
     try:
@@ -120,6 +143,15 @@ def open_history_page(window):
 
     app.protocol("WM_DELETE_WINDOW", go_back)
 
+    Button(
+         app,
+         text="Back to Menu",
+         width=20,
+         height=2,
+         font=("Ink Free", 13, "bold"),
+         bg="#90c9de",
+         command=go_back
+           ).pack(pady=10)
 
 
 

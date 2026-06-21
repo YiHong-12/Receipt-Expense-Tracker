@@ -50,40 +50,44 @@ window.title("Receipt Expense Tracker - Menu")
 window.geometry("600x650")
 window.configure(bg="#ceecf5")
 
+#Menu Title
 title1=Label(window,
             text=" Receipt Expense Tracker",
             font = ("Ink Free",30,"bold"),
             bg="#ceecf5",relief=RAISED,bd=15)
 title1.place(x=60,y=10)
 
-
+#Menu Subtitle
 subtitle1=Label(window,text="Please select the function you need"
                 ,font=("Ink Free",15,"bold"))                
 subtitle1.place(x=130,y=100)
 
+#Upload Receipt button
 bt_upload=Button(window,text="1) Upload Receipt",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=imp_upload)#upload command later
+                 bg="#90c9de",command=imp_upload)
 bt_upload.place(x=200,y=150)
 
+#Open Dashboard button
 bt_dashboard=Button(window,text="2) Open Dashboard",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=imp_dashboard)#upload command later
+                 bg="#90c9de",command=imp_dashboard)
 bt_dashboard.place(x=200,y=230)
                  
-
+#Check History button
 bt_history=Button(window,text="3) Check History",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=imp_history)#upload command later
+                 bg="#90c9de",command=imp_history)
 bt_history.place(x=200,y=310)
 
+#Exit Button
 bt_exit=Button(window,text="4) Exit",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=Exit)#upload command later
+                 bg="#90c9de",command=Exit)
 bt_exit.place(x=200,y=390)
             
 window.mainloop()
