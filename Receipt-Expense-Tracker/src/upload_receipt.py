@@ -22,7 +22,7 @@ select_image = None
 
 def open_upload_page(main_menu):
     app = tk.Toplevel(main_menu)
-    app.title("Receipt Upload")
+    app.title("Receipt Expense Tracker - Upload Receipt")
     app.minsize(600, 650)
     app.configure(bg="#ceecf5")
 

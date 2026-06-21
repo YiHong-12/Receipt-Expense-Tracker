@@ -7,7 +7,7 @@ OUTPUT_FILE = "edited_receipts.json"
 # Treeview reference: https://www.pythontutorial.net/tkinter/tkinter-treeview/
 def open_history_page(window):
     app = tk.Toplevel(window)
-    app.title("Receipt History")
+    app.title("Receipt Expense Tracker - Receipt History")
     app.minsize(700, 500)
     app.configure(bg="#ceecf5")
 

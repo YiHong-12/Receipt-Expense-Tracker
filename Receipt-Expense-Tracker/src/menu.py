@@ -46,7 +46,7 @@ def Exit():
         pass
 
 window = Tk()
-window.title("Receipt Expense Tracker")
+window.title("Receipt Expense Tracker - Menu")
 window.geometry("600x650")
 window.configure(bg="#ceecf5")
 

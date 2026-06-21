@@ -7,7 +7,7 @@ import categorize
 def open_edit_receipt_page(upload_page, receipt):
 
     app = tk.Toplevel(upload_page)
-    app.title("Receipt Validation and Manual Edit")
+    app.title("Receipt Expense Tracker - Edit Receipt")
     app.minsize(700, 500)
     app.configure(bg="#ceecf5")
 
@@ -174,6 +174,8 @@ def open_edit_receipt_page(upload_page, receipt):
 
         messagebox.showinfo("Saved", "Receipt saved successfully!")
 
+        go_back()
+
     # Save Button
     Button(app, text="Save", width=15, command=save).pack(pady=15)
 
@@ -182,3 +184,4 @@ def open_edit_receipt_page(upload_page, receipt):
         upload_page.deiconify()
 
     app.protocol("WM_DELETE_WINDOW", go_back)
+

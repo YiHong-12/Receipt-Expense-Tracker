@@ -9,6 +9,7 @@ def open_dashboard_page(window):
     app = tk.Toplevel(window)
     app.title("Receipt Expense Tracker - Dashboard")
     app.geometry("900x600")
+    app.configure(bg="#ceecf5")
 
     title = Label(
         app,

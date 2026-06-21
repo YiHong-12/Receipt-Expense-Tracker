@@ -1,6 +1,0 @@
-tensorflow
-tf-keras
-keras-ocr
-matplotlib
-opencv-python-headless
-numpy<2.0
