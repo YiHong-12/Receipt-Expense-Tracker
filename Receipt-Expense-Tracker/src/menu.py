@@ -11,7 +11,6 @@ from tkinter import messagebox
 import upload_receipt
 import dashboard
 import history
-import edit
 
 #pathlib function: pathlib — Object-oriented filesystem paths — Python 3.9.4 documentation. (n.d.). Docs.python.org. https://docs.python.org/3/library/pathlib.html
 SRC_folder = Path(__file__).resolve().parent
@@ -38,11 +37,6 @@ def imp_history():
     messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')
     window.withdraw()  # Hide the main menu window
     history.open_history_page(window)
-
-def imp_Edit():
-    messagebox.showinfo(title='Loading Page', message='Navigating to Manual Edit Module...')
-    window.withdraw()  # Hide the main menu window
-    edit.open_edit_page(window)
 
 def Exit():
     if messagebox.askyesno(title='Exit ?',message="Do you want to exit the program?"):
@@ -86,16 +80,10 @@ bt_history=Button(window,text="3) Check History",
                  bg="#90c9de",command=imp_history)#upload command later
 bt_history.place(x=200,y=310)
 
-bt_Edit=Button(window,text="4) Manual Edit",
-                 width=20,height=2,
-                 font=("Ink Free", 13,"bold"),
-                 bg="#90c9de",command=imp_Edit)#upload command later
-bt_Edit.place(x=200,y=390)
-
-bt_exit=Button(window,text="5) Exit",
+bt_exit=Button(window,text="4) Exit",
                  width=20,height=2,
                  font=("Ink Free", 13,"bold"),
                  bg="#90c9de",command=Exit)#upload command later
-bt_exit.place(x=200,y=470)
+bt_exit.place(x=200,y=390)
             
 window.mainloop()
