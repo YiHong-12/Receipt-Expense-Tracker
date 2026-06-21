@@ -62,7 +62,7 @@ def open_upload_page(main_menu):
             print(extracted_data)
 
             app.withdraw()  # Hide the upload page
-            edit_receipt.open_edit_receipt_page(app)  # Open the edit receipt page
+            edit_receipt.open_edit_receipt_page(app, extracted_data)  # Open the edit receipt page
 
         else:
             print("\n[ERROR] Please click 'Locate Image' and select a file first!")
