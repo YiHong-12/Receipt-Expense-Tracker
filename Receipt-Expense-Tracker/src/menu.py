@@ -31,7 +31,7 @@ def imp_upload():
 def imp_dashboard():
     messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
     window.withdraw()  # Hide the main menu window
-    dashboard.open_dashboard_page(window)
+    dashboard.main()
 
 def imp_history():
     messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')

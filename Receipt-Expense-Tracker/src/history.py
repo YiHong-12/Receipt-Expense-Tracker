@@ -4,6 +4,7 @@ import json
 
 OUTPUT_FILE = "edited_receipts.json"
 
+# Treeview reference: https://www.pythontutorial.net/tkinter/tkinter-treeview/
 def open_history_page(window):
     app = tk.Toplevel(window)
     app.title("Receipt History")

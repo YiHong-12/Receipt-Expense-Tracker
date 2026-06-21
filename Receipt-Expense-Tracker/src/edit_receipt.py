@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 import validation
+import categorize
 
 def open_edit_receipt_page(upload_page, receipt):
 
@@ -130,6 +131,41 @@ def open_edit_receipt_page(upload_page, receipt):
             })
 
         validation.save_receipt(receipt_data)
+
+        items = []
+        for name_entry, qty_entry, price_entry in item_rows:
+
+            #convert quantity to numeric field
+            try:
+                qty = int(qty_entry.get())
+            except ValueError:
+                messagebox.showerror("Invalid Quantity",
+                                 f"Quantity for '{name_entry.get()}' must be a number.")
+                return
+
+            #convert price tp numeric field
+            try:
+                price = float(price_entry.get())
+            except ValueError:
+                messagebox.showerror("Invalid Price",
+                                 f"Price for '{name_entry.get()}' must be a number.")
+                return
+            
+            items.append({
+            "name": name_entry.get(),
+            "quantity": qty,
+            "price": price
+            })
+
+        #categorize the items
+        items = categorize.categorize_transaction(items)
+
+        #save the categorized items
+        try:
+            categorize.save_transaction(items, total_entry.get())
+        except Exception as e:
+            messagebox.showerror("Save Error", f"Could not save transaction: {e}")
+            return
 
         messagebox.showinfo("Saved", "Receipt saved successfully!")
 

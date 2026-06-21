@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import categorize as db
 
 
-
 def get_transactions():
     return db.load_transactions()
 
