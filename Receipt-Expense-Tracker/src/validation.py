@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-OUTPUT_FILE = "edited_receipts.txt"
+OUTPUT_FILE = "edited_receipts.json"
 
 def save_receipt(receipt_data):
 
@@ -11,7 +11,7 @@ def save_receipt(receipt_data):
     try:
         with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
-    except:
+    except (FileNotFoundError, json.JSONDecodeError):
         data = []
 
     data.append(receipt_data)
