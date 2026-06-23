@@ -127,5 +127,18 @@
             }
         ],
         "total": 49.64
+    },
+    {
+        "date": "2026-06-23 18:17:12",
+        "merchant": "Econsave",
+        "items": [
+            {
+                "name": "Chicken Masala",
+                "quantity": 1,
+                "price": 10.0,
+                "category": "food"
+            }
+        ],
+        "total": 10.0
     }
 ]
