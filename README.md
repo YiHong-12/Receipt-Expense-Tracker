@@ -45,27 +45,13 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 ### 5.Install Dependencies in One Shot
 Do not manually install individual libraries. Tell pip to read our shared configuration blueprint file by running:
 ```bash
-pip install -r requirements.txt
+pip install tensorflow==2.15.0 keras_ocr
 ```
 
 ### Testing Before Starting
 Once everything is successfully installed and your environment is activated, run this in terminal:
 ```bash
-python Receipt-Expense-Tracker/src/text_extractor.py
+python Receipt-Expense-Tracker/src/menu.py
 ```
 
-### Must Do Before Coding
-Ensure your Python scripts start exactly like this:
-```bash
-import sys
-import tf_keras
-
-sys.modules['tensorflow.keras'] = tf_keras
-sys.modules['keras'] = tf_keras
-
-import keras_ocr
-import math
-
-# Your project logic starts below...
-```
 
