@@ -24,17 +24,14 @@ def run_python_file(file_name):
     )
 
 def imp_upload():
-    messagebox.showinfo(title='Loading Page', message='Navigating to Receipt Capture Module...')
     window.withdraw()  # Hide the main menu window
     upload_receipt.open_upload_page(window)
 
 def imp_dashboard():
-    messagebox.showinfo(title='Loading Page', message='Navigating to Dashboard...')
     window.withdraw()  # Hide the main menu window
     dashboard.open_dashboard_page(window)
 
 def imp_history():
-    messagebox.showinfo(title='Loading Page', message='Navigating to Transaction History...')
     window.withdraw()  # Hide the main menu window
     history.open_history_page(window)
 
