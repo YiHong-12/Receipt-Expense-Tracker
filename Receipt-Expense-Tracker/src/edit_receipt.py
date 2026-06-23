@@ -12,30 +12,38 @@ def open_edit_receipt_page(upload_page, receipt):
     app.configure(bg="#ceecf5")
 
     Label(
-        app,
-        text="Receipt Validation",
-        font=("Arial", 16, "bold")
+    app,
+    text=" Receipt Validation",
+    font=("Ink Free", 30, "bold"),
+    bg="#ceecf5",
+    relief=RAISED,
+    bd=15
     ).pack(pady=15)
 
-    main_frame = Frame(app)
+    main_frame = Frame(app,bg="#ceecf5")
     main_frame.pack(pady=10)
 
     # Merchant
-    merchant_frame = Frame(main_frame)
+    merchant_frame = Frame(main_frame, bg="#ceecf5")
     merchant_frame.grid(row=0, column=0, columnspan=3, sticky="w", pady=(5, 20))
 
-    Label(merchant_frame, text="Merchant:", font=("Arial", 11)).pack(side=LEFT)
+    Label(
+    merchant_frame,
+    text="Merchant:",
+    font=("Ink Free", 13, "bold"),
+    bg="#ceecf5"
+    ).pack(side=LEFT)
 
     merchant_entry = Entry(merchant_frame, width=40)
     merchant_entry.insert(0, receipt["merchant"])
     merchant_entry.pack(side=LEFT, padx=5)
 
     # Table headers
-    Label(main_frame, text="Item Name", width=25, relief="solid").grid(row=2, column=0)
-    Label(main_frame, text="Quantity", width=10, relief="solid").grid(row=2, column=1)
-    Label(main_frame, text="Price (RM)", width=12, relief="solid").grid(row=2, column=2)
+    Label(main_frame, text="Item Name", width=25, relief="solid",font=("Ink Free", 12, "bold"), bg="#90c9de").grid(row=2, column=0)
+    Label(main_frame, text="Quantity", width=10, relief="solid",font=("Ink Free", 12, "bold"), bg="#90c9de").grid(row=2, column=1)
+    Label(main_frame, text="Price (RM)", width=12, relief="solid",font=("Ink Free", 12, "bold"), bg="#90c9de").grid(row=2, column=2)
 
-    Label(main_frame, text="Action", width=8, relief="solid").grid(row=2, column=3)
+    Label(main_frame, text="Action", width=8, relief="solid",font=("Ink Free", 12, "bold"), bg="#90c9de").grid(row=2, column=3)
 
     item_rows = []
     next_row_idx = 3
@@ -112,7 +120,15 @@ def open_edit_receipt_page(upload_page, receipt):
     calculate_total()
 
     # button to add more items
-    Button(app, text="+ Add New Item", width=15, command=add_item_row).pack(pady=5)
+    Button(
+    app,
+    text="+ Add New Item",
+    width=20,
+    height=2,
+    font=("Ink Free", 13, "bold"),
+    bg="#90c9de",
+    command=add_item_row
+    ).pack(pady=5)
 
     # Save function
     def save():
@@ -177,7 +193,15 @@ def open_edit_receipt_page(upload_page, receipt):
         go_back()
 
     # Save Button
-    Button(app, text="Save", width=15, command=save).pack(pady=15)
+    Button(
+    app,
+    text="Save",
+    width=20,
+    height=2,
+    font=("Ink Free", 13, "bold"),
+    bg="#90c9de",
+    command=save
+    ).pack(pady=8)
 
     def go_back():
         app.destroy()
@@ -185,3 +209,12 @@ def open_edit_receipt_page(upload_page, receipt):
 
     app.protocol("WM_DELETE_WINDOW", go_back)
 
+    Button(
+    app,
+    text="Go Back",
+    width=20,
+    height=2,
+    font=("Ink Free", 13, "bold"),
+    bg="#90c9de",
+    command=go_back
+    ).pack(pady=5)
